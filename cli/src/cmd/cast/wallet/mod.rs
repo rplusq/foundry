@@ -98,6 +98,25 @@ pub enum WalletSubcommands {
         #[clap(long, short)]
         address: Address,
     },
+    Import {
+        #[clap(
+            help = "The identifier for the account in the keystore.",
+            value_name = "ACCOUNT_NAME"
+        )]
+        account_name: String,
+        #[clap(
+            help = "The private key to import.",
+            value_name = "PRIVATE_KEY",
+            value_parser = foundry_common::clap_helpers::strip_0x_prefix
+        )]
+        private_key: String,
+        #[clap(
+            long,
+            short,
+            help = "Triggers a hidden password prompt for the JSON keystore.",
+        )]
+        password: bool,
+    }
 }
 
 impl WalletSubcommands {
@@ -169,6 +188,18 @@ impl WalletSubcommands {
                         println!("Validation failed. Address {address} did not sign this message.")
                     }
                 }
+            }
+            WalletSubcommands::Import { account_name, private_key, password } => {
+                // Error Handling: In each step, we'll need to properly handle potential errors, such as file I/O errors or decryption errors, and give the user informative messages about what went wrong.
+                
+                // use the rpassword crate to prompt the user for their private key and password in a secure manner.
+                let private_key = rpassword::prompt_password("Enter private key: ")?;
+                let password = rpassword::prompt_password("Enter password: ")?;
+                // Storing Encrypted Keystore: We'll encrypt the private key with the password using the eth-keystore crate and write the encrypted keystore as a JSON file under the ~/.foundry/keystores directory. We'll use serde_json to handle JSON serialization.
+                eth_keystore::encrypt_key(&private_key, &password, None)?;
+
+
+
             }
         };
 
