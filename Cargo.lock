@@ -783,7 +783,7 @@ dependencies = [
 
 [[package]]
 name = "alloy-signer-turnkey"
-version = "1.0.36"
+version = "1.0.37"
 dependencies = [
  "alloy-consensus",
  "alloy-network",
@@ -10588,12 +10588,13 @@ dependencies = [
 
 [[package]]
 name = "turnkey_api_key_stamper"
-version = "0.1.1"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bf0ef7eb2e15123a9792084899fa2b1e9bed28fc02a8ed5ad5af27c651bd42af"
+checksum = "88ff3d11991690d61cc4c44fb12fa95656bf2a1480be8abbb44d05ee7b75177a"
 dependencies = [
  "base64 0.22.1",
  "hex",
+ "k256",
  "p256",
  "rand_core 0.6.4",
  "serde",
@@ -10603,9 +10604,9 @@ dependencies = [
 
 [[package]]
 name = "turnkey_client"
-version = "0.1.1"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93a45cf5f4d07a243b64f6a418e71da026bf13a0e27c3a87e123d9ecd29481d7"
+checksum = "c9846185545f447fd6ae7b19cc04623b8be9f430e2230950565ad0400b6a62b6"
 dependencies = [
  "mime",
  "prost 0.12.6",
@@ -10613,6 +10614,7 @@ dependencies = [
  "reqwest",
  "serde",
  "serde_json",
+ "serde_with",
  "thiserror 2.0.17",
  "tokio",
  "turnkey_api_key_stamper",
